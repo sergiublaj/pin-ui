@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'pin-ui';
+  readonly title = 'pin-ui';
+  readonly year = new Date().getFullYear();
+  readonly author = 'Sergiu Blaj';
 }

@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center mb-5">
+    <h2 class="heading-section">Profile</h2>
+  </div>
+</div>
+<div class="icon d-flex align-items-center justify-content-center">
+  <span class="fa fa-user-o"></span>
+</div>
+<span> Logged in as {{ userInfo.email }} ({{ userInfo.age }}) </span>
+<div class="form-group">
+  <button type="submit" class="form-control btn btn-primary rounded submit px-3" (click)="logout()">
+    Logout
+  </button>
+</div>
+<div *ngIf="isAdmin">
+  <hr>
+  <h4>Add a new user</h4>
+  <form [formGroup]="userForm" action="#" class="login-form">
+    <div class="form-group my-2">
+      <input type="text" class="form-control rounded-left" placeholder="Username" formControlName="name">
+    </div>
+    <div class="form-group my-2 text-start" *ngIf="formSubmitted && name?.errors">
+      <span class="text-danger">Please enter a name!</span>
+    </div>
+    <div class="form-group my-2">
+      <input type="text" class="form-control rounded-left" placeholder="Email" formControlName="email">
+    </div>
+    <div class="form-group my-2 text-start" *ngIf="formSubmitted && email?.errors">
+      <span class="text-danger">Please enter an email!</span>
+    </div>
+    <div class="form-group my-2 text-start" *ngIf="formMessage">
+      <span class="text-warning"> {{ formMessage }}</span>
+    </div>
+    <div class="form-group mt-2">
+      <button type="button" class="form-control btn btn-secondary rounded submit px-3" (click)="addUser()">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Add user
+      </button>
+    </div>
+  </form>
+  <div *ngIf="users">
+    <hr>
+    <h4>Available users</h4>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
